@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../static/css/index.css" rel="stylesheet" type="text/css">
+    <script src="../static/js/jquery-3.0.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                alert("生成中，可能会花一定时间...");
+                alert("请不要再次点击按钮！完成后会提示。");
+                $.ajax({
+                    url: "wx/code?num=" + $("#codenumber").val(),
+                    type: "get",
+                    dataType: "json",
+                    success: function (e) {
+                        if (e.result == "0") {
+                            alert("生成失败！");
+                        } else if (e.result == "1") {
+                            alert("生成成功！请至默认目录查看");
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<div>
+    生成二维码个数选择：
+    <select id="codenumber">
+        <option value="0">请选择</option>
+        <option value="1">1</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+    </select>
+    <input type="button" value="生成" id="btn" style="width: 60px;height: 30px;">
+    <br/>
+    <span>(默认保存在E:/微信小程序/  目录下)</span>
+</div>
+</body>
+</html>
